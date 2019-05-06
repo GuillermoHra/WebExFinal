@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
-var connectionURL = 'mongodb+srv://admin:taquitos@cluster0-xg9bk.mongodb.net/clase?retryWrites=true'
+if(process.env.NODE_ENV === 'production') {
+  var connectionURL = process.env.conurl
+} else {
+  const config = require('../config.js')
+  var connectionURL = config.connectionURL
+}
 
 mongoose.connect( connectionURL, {
   useNewUrlParser: true,
